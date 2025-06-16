@@ -25,11 +25,14 @@ export async function POST(req) {
 
     // Prepare Data To Save In Database
 
+    console.log(data);
+
     const userData = {
 
         _id: data.id,
         email: data.email_addresses[0].email_address,
         name: `${data.first_name} ${data.last_name}`,
+        username: `${data.username}`,
         image: data.image_url
     }
 
@@ -46,7 +49,7 @@ export async function POST(req) {
             break;
 
         case 'user.deleted':
-            await User.findByIdAndDelete(data.delete);
+            await User.findByIdAndDelete(data.id);
 
         default:
             break;
